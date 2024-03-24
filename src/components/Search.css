@@ -1,0 +1,93 @@
+
+.container {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #7080D4; /* Light background color */
+  }
+  
+  .title {
+    font-family: 'League Spartan'; /* Use a Google Font for the title */
+    color: rgb(255, 255, 255); /* Dark text color */
+    margin-bottom: 15px; /* Spacing below the title */
+    margin-right: 40px;
+    font-size: 70px;
+
+    
+  }
+  
+  .search-bar {
+    width: 600px; /* Adjust the width of the search bar */
+    height: 40px;
+    padding: 6px;
+    font-size: 16px;
+    border: 4px solid #c0bfcb; /* Blue border */
+    border-radius: 20px; /* Rounded corners */
+    margin-bottom: 20px; /* Add some spacing below the search bar */
+    /*align-self: flex-start;
+    padding-left: 10px;*/
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu-icon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    /*transition: font-size 0.3s ease;*/
+  }
+  
+  .menu-line {
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background-color: rgb(255, 255, 255); /* Dark color for the lines */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .menu-line:nth-child(1) {
+    top: 25%;
+  }
+  
+  .menu-line:nth-child(2) {
+    top: 50%;
+  }
+  
+  .menu-line:nth-child(3) {
+    top: 75%;
+  }
+  
+  .pumaLogo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 80px;
+    border-radius: 15px;
+    /*transition: width 0.3s ease;*/
+  }
+  .search-div{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .searchIcon{
+    border-radius: 90px;
+    background-color: rgb(74,162,122);
+    margin-left: 10px;
+    border: none;
+    height:70%;
+  }
