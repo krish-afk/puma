@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.71a3e90f.css",
+    "main.js": "/static/js/main.8721769e.js",
+    "static/js/453.9cface5b.chunk.js": "/static/js/453.9cface5b.chunk.js",
+    "static/media/poppins-devanagari-400-normal.woff": "/static/media/poppins-devanagari-400-normal.0e11b62db931f85340d4.woff",
+    "static/media/poppins-devanagari-400-normal.woff2": "/static/media/poppins-devanagari-400-normal.64d5f06ee726edd58ca3.woff2",
+    "static/media/baloo-thambi-2-tamil-400-normal.woff": "/static/media/baloo-thambi-2-tamil-400-normal.302ee65c02ba159bcd23.woff",
+    "static/media/baloo-thambi-2-tamil-800-normal.woff": "/static/media/baloo-thambi-2-tamil-800-normal.c4c05db501b35ce31aae.woff",
+    "static/media/baloo-thambi-2-latin-400-normal.woff": "/static/media/baloo-thambi-2-latin-400-normal.9a009bf8fc86cdf5de5e.woff",
+    "static/media/baloo-thambi-2-latin-800-normal.woff": "/static/media/baloo-thambi-2-latin-800-normal.862b6e1e5b2e5ab6a61c.woff",
+    "static/media/baloo-thambi-2-tamil-400-normal.woff2": "/static/media/baloo-thambi-2-tamil-400-normal.850fa479b8408b7478a1.woff2",
+    "static/media/baloo-thambi-2-latin-ext-400-normal.woff": "/static/media/baloo-thambi-2-latin-ext-400-normal.d40743dd403c33f89619.woff",
+    "static/media/baloo-thambi-2-latin-ext-800-normal.woff": "/static/media/baloo-thambi-2-latin-ext-800-normal.c4d499530f477e6ebc78.woff",
+    "static/media/baloo-thambi-2-tamil-800-normal.woff2": "/static/media/baloo-thambi-2-tamil-800-normal.4a0b46c1fe97be436074.woff2",
+    "static/media/baloo-thambi-2-latin-400-normal.woff2": "/static/media/baloo-thambi-2-latin-400-normal.11018e452dff24910680.woff2",
+    "static/media/baloo-thambi-2-latin-800-normal.woff2": "/static/media/baloo-thambi-2-latin-800-normal.e50d6a326e062ed70438.woff2",
+    "static/media/league-spartan-latin-800-normal.woff": "/static/media/league-spartan-latin-800-normal.795098e4e7d4adaaa3c4.woff",
+    "static/media/league-spartan-latin-ext-800-normal.woff": "/static/media/league-spartan-latin-ext-800-normal.e47b448c9c52511b2c6b.woff",
+    "static/media/baloo-thambi-2-latin-ext-400-normal.woff2": "/static/media/baloo-thambi-2-latin-ext-400-normal.02ee28f0517142ddac0a.woff2",
+    "static/media/baloo-thambi-2-latin-ext-800-normal.woff2": "/static/media/baloo-thambi-2-latin-ext-800-normal.b0f614e848b89f9bc634.woff2",
+    "static/media/league-spartan-latin-800-normal.woff2": "/static/media/league-spartan-latin-800-normal.9fb82b353b50c58bcd2b.woff2",
+    "static/media/league-spartan-latin-ext-800-normal.woff2": "/static/media/league-spartan-latin-ext-800-normal.ccf5dde173db49d09fb3.woff2",
+    "static/media/poppins-latin-400-normal.woff": "/static/media/poppins-latin-400-normal.cda9c93f49237f11c766.woff",
+    "static/media/poppins-latin-400-normal.woff2": "/static/media/poppins-latin-400-normal.405055dd680fa1dcdfa2.woff2",
+    "static/media/poppins-latin-ext-400-normal.woff": "/static/media/poppins-latin-ext-400-normal.8cc52669c8e8a6735699.woff",
+    "static/media/baloo-thambi-2-vietnamese-400-normal.woff": "/static/media/baloo-thambi-2-vietnamese-400-normal.499e026861b0753c7b94.woff",
+    "static/media/league-spartan-vietnamese-800-normal.woff": "/static/media/league-spartan-vietnamese-800-normal.4dac4c96a6f9f09fdd39.woff",
+    "static/media/baloo-thambi-2-vietnamese-800-normal.woff": "/static/media/baloo-thambi-2-vietnamese-800-normal.ae8153b5c91473bec78f.woff",
+    "static/media/poppins-latin-ext-400-normal.woff2": "/static/media/poppins-latin-ext-400-normal.4f38b4331448d2313adc.woff2",
+    "static/media/baloo-thambi-2-vietnamese-400-normal.woff2": "/static/media/baloo-thambi-2-vietnamese-400-normal.677853504566654d02e8.woff2",
+    "static/media/league-spartan-vietnamese-800-normal.woff2": "/static/media/league-spartan-vietnamese-800-normal.590c81e31c2af40304c0.woff2",
+    "static/media/baloo-thambi-2-vietnamese-800-normal.woff2": "/static/media/baloo-thambi-2-vietnamese-800-normal.74ced4bd382eb527a9cb.woff2",
+    "index.html": "/index.html",
+    "main.71a3e90f.css.map": "/static/css/main.71a3e90f.css.map",
+    "main.8721769e.js.map": "/static/js/main.8721769e.js.map",
+    "453.9cface5b.chunk.js.map": "/static/js/453.9cface5b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.71a3e90f.css",
+    "static/js/main.8721769e.js"
+  ]
+}
