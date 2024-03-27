@@ -3,8 +3,10 @@ import {useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import {grey} from '@mui/material/colors';
 import "@fontsource/league-spartan/800.css";
+import { PropaneSharp } from '@mui/icons-material';
+import {Link} from 'react-router-dom'
 
-export default function Search(){
+export default function Search(props){
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
@@ -35,7 +37,7 @@ export default function Search(){
             placeholder="Lookup a class..."
             className="search-bar" // Search-bar class here
           />
-          <button className='searchIcon'><SearchIcon sx={{color: grey[50]}} fontSize='large'/></button>
+         <Link to='/map'><button className='searchIcon' onClick={props.handleSearch}><SearchIcon sx={{color: grey[50]}} fontSize='large'/></button></Link>
           </div>
          
         </div>
