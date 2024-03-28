@@ -1,6 +1,7 @@
 import './App.css';
 import Home from './components/Home';
 import Search from './components/Search';
+import Map from './components/Map';
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,10 +26,11 @@ function App() {
         path="/search"
         element={<Search/>}
         />
-        {/* <Route
+        <Route
         exact
         path='/map'
-        />  FOR MAP*/}  
+        element={<Map />}
+        /> 
       </Routes>
     </Router>
    </div>
