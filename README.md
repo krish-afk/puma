@@ -3,7 +3,7 @@
  Step 2 : git checkout -b "YOUR BRANCH NAME"\
  Step 3: git add .\
  Step 4: git commit -m "Message"\
- Step 5 : git push origin "YOUR BRANCH NAME"
+ Step 5: git push origin "YOUR BRANCH NAME"
 
 ## To start the server:
 ###  Step 1. `npm install`
