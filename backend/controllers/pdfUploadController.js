@@ -13,43 +13,43 @@ const extractTextFromPDF = async (filePath) => {
     }
 };
 
-// Replace the path with the absolute path to your PDF file
-extractTextFromPDF('/Users/fionagormley/Desktop/Transcript.pdf').then((text) => {
-    const lines = text.split('\n');
-    
-    const courseCompsciLine = /COMPSCI\s+(\d+)\s+(.*?)\s+(\d+\.\d+[A-F][+-]?)/; // COMPSCI followed by any number of whitespace characters, followed by one or more digits, 
-    // followed by any text (course description), followed by a decimal with any number of digist followed by another decimal with any number of digits, the ? makes the plus or minus optional
-    // followed by a letter grade, either parentheses indicate what we are capturing
-    const courseMathLine= /MATH\s+(\d+)\s+(.*?)\s+(\d+\.\d+[A-F][+-]?)/;
+extractTextFromPDF('/Users/fionagormley/Desktop/Transcript.pdf').then((text) => { // this needs to be replaced with the path to the user's transcript
+const lines = text.split('\n');
 
-    const csCourses = []
-    const mathCourses = []
+const courseCompsciLine = /COMPSCI\s+(\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
+const courseMathLine = /MATH\s+(\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
 
-        lines.forEach(line =>{
-             CSmatch = lines.match(courseCompsciLine);
-            MAmatch = lines.match(courseMathLine);
-            if(CSmatch){
-                csCourses.push({
-                code: `COMPSCI ${match[1]}`,
-                title: match[2],
-                credits: match[3]
-                });
-            }
+const transcript = [];
+const csCourses = [];
+const mathCourses = [];
+
+lines.forEach(line => {
+    console.log('Processing line:', line);
+    const csMatch = line.match(courseCompsciLine);
+    const mathMatch = line.match(courseMathLine);
+
+    if (csMatch) {
+        transcript.push({
+            name: `COMPSCI ${csMatch[1]}`,
+            grade: csMatch[2]
         });
-            
-  
+    }
+    if (mathMatch) {
+        transcript.push({
+            name: `MATH ${mathMatch[1]}`,
+            grade: mathMatch[2]
+        });
+    }
+});
 
-
-
-    console.log(text);
-    // You can now see what the extracted text looks like
+console.log('transcript', transcript);
 });
 
 
 
 
 
-// const multer = require('multer'); // middleare for handling file uploads
+// const multer = require('multer'); // middleware for handling file uploads
 // const pdfParse = require('pdf-parse'); 
 // const upload = multer({ dest: 'uploads/' }); // will upload it to the uploads directory of server
 
@@ -63,8 +63,10 @@ extractTextFromPDF('/Users/fionagormley/Desktop/Transcript.pdf').then((text) => 
 //         // Read the PDF file 
 //         const buffer = file.buffer ? file.buffer : fs.readFileSync(file.path); //reads file from saved path on disk
 
-//         // Extract text from PDF
+//         // Extract course name and grade from PDF
 //         const data = await pdfParse(buffer);
+
+
 //         const text = data.text; // Extracted text from the PDF that we need!
 
         
