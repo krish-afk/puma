@@ -16,8 +16,6 @@
     margin-bottom: 15px; /* Spacing below the title */
     margin-right: 40px;
     font-size: 70px;
-
-    
   }
   
   .search-bar {
@@ -36,38 +34,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .menu-icon {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    cursor: pointer;
-    top: 20px;
-    right: 20px;
-    /*transition: font-size 0.3s ease;*/
-  }
-  
-  .menu-line {
-    position: absolute;
-    width: 30px;
-    height: 4px;
-    background-color: rgb(255, 255, 255); /* Dark color for the lines */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .menu-line:nth-child(1) {
-    top: 25%;
-  }
-  
-  .menu-line:nth-child(2) {
-    top: 50%;
-  }
-  
-  .menu-line:nth-child(3) {
-    top: 75%;
   }
   
   .pumaLogo {
