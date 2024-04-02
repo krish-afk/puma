@@ -1,17 +1,15 @@
 const express = require('express');
 const multer = require('multer'); // middleware for handling file uploads
-const fs = require('fs');
 const pdfParse = require('pdf-parse'); // used to parse the PDF and extract text
 
 // Initialize express and multer
-const app = express(); //initializes express application to set up server
-const upload = multer({ dest: 'uploads/' }); // files will be saved in 'uploads/' directory
+const app = express(); // initializes express application to set up server
+const upload = multer(); // no need to specify a destination for multer, as we won't be storing the file
 
-// Function to extract text from a PDF file ata  given file path
-const extractTextFromPDF = async (filePath) => {
-    const dataBuffer = fs.readFileSync(filePath); // reads file from saved path into a buffer
+// Function to extract text from a PDF file at a given file buffer
+const extractTextFromPDF = async (fileBuffer) => {
     try {
-        const data = await pdfParse(dataBuffer); // parses the PDF to extract text
+        const data = await pdfParse(fileBuffer); // parses the PDF to extract text
         return data.text; // returns the extracted text
     } catch (error) {
         console.error('Error extracting text from PDF:', error); // handles parsing errors
@@ -20,13 +18,13 @@ const extractTextFromPDF = async (filePath) => {
 };
 
 // Define a route to upload and process a PDF file
-app.post('/upload-pdf', upload.single('file'), async (req, res) => { //defines a POST route on the upload endpoint of the server, its processing a sinlge file we're calling file
-    const file = req.file; // retrieves file from request obj popualted by multer
-    if (!file) {
-        return res.status(400).send({ message: 'Please upload a file.' }); // if file hasn't actually been uploaded
+app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines a POST route on the upload endpoint of the server, processing a single file named 'file'
+    const fileBuffer = req.file.buffer; // retrieves file buffer from request obj populated by multer
+    if (!fileBuffer) {
+        return res.status(400).send({ message: 'Please upload a file.' }); // if file buffer is missing
     }
 
-    const text = await extractTextFromPDF(file.path);
+    const text = await extractTextFromPDF(fileBuffer); // returns all of the text in a transcript from the PDF the user uploaded
 
     if (!text) {
         return res.status(500).send({ message: 'Could not extract text from PDF' });
@@ -60,11 +58,11 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { //defines a
 
     console.log('transcript', transcript);
 
-   
-    res.json({ message: 'File uploaded successfully', transcript: transcript });  //Respond with extracted text and transcript
+    res.json({ message: 'File uploaded successfully', transcript: transcript });  // Respond with extracted text and transcript
 });
 
 app.listen(3000, () => {
-    console.log('Server running on port 3000'); //starts the server
+    console.log('Server running on port 3000'); // starts the server
 });
+
 
