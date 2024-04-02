@@ -23,11 +23,10 @@ export default function SignUp(props){
         <h1 className='heading-right'><b>Welcome! Sign Up</b></h1>
         <TextField id="outlined-basic" label="Create Username" variant="outlined"  className="text-username" margin="normal"/>
         <TextField id="outlined-basic" label="Create Password" type="password" variant="outlined"  className="text-password" margin="normal"/> 
-        <Button className = "file-button" component="label" role={undefined} variant="outlined" tabIndex={-1}> Upload file
+        <Button className = "file-button" component="label" role={undefined} variant="outlined" tabIndex={-1}> Upload PDF Transcript
         <VisuallyHiddenInput type="file" /> </Button>
         <Link to="/search"><button className="submit-sign-up" >Sign Up</button></Link>
         <br/>
-        <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} >Sign in </a> </span>
+        <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} >Sign In </a> </span>
     </div>
 }
-
