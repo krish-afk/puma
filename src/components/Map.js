@@ -12,7 +12,7 @@ export default function Map() {
         const fetchData = async () => {
             try {
                 console.log("Searching");
-                const response = await axios.get('http://localhost:8000/getClass?course=CS220');
+                const response = await axios.get('http://localhost:8000/getClass?course=CS110');
                 console.log(response.data);
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
@@ -34,6 +34,7 @@ export default function Map() {
     console.log("PPREREQ", prereqs);
 
     // example that would be returned in query:
+    var courseName = result && result.courseInfo ? result.courseInfo.Name : "";
     var parentCourse = new Course(220, "CS", "Programming Methodology", "...", prereqs && prereqs.length > 0 ? prereqs[0][0] : []);
 
     const results = [parentCourse];
@@ -42,7 +43,7 @@ export default function Map() {
         <div className="prereq-list">
             <ul>
                 {results.map((course) => (
-                    <h3 key={course.id} className="course-name">{course.dept + course.id + " - " + course.name}</h3>
+                    <h3 key={course.id} className="course-name">{courseName}</h3>
                 ))}
             </ul>
             <div className="container">
