@@ -8,7 +8,7 @@ import { CastRounded } from '@mui/icons-material';
 export default function Map() {
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
-    let link = 'http://localhost:8000/getClass?course=CS230'
+    let link = 'http://localhost:8000/getClass?course=COMPSCI250'
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -34,7 +34,7 @@ export default function Map() {
 
     // example that would be returned in query:
     console.log(result.courseInfo.Name)
-    var parentCourse = new Course(link.substring(40, 43), "CS", result.courseInfo.Name.substring(9), "...", prereqs && prereqs.length > 0 ? prereqs: []);
+    var parentCourse = new Course(link.substring(45,48), "CS", result.courseInfo.Name.substring(9), "...", prereqs && prereqs.length > 0 ? prereqs: []);
     const results = [parentCourse];
     return (
         <div className="prereq-list">
@@ -60,4 +60,3 @@ export default function Map() {
         </div>
     );
 }
-
