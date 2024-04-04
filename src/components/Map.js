@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import "@fontsource/league-spartan/800.css";
 import Course from './CourseClass';
 import axios from 'axios';
+import CustomMenu from './Menu'; // Import the CustomMenu component
+
 
 export default function Map() {
     const [result, setResults] = useState([]);
@@ -42,22 +44,14 @@ export default function Map() {
     return (
         <div className="prereq-list">
             <ul>
-                {results.map((course) => (
-                    <h3 key={course.id} className="course-name">{courseName}</h3>
-                ))}
+                <h3 className="course-name">{courseName}</h3>
             </ul>
             <div className="container">
                 <ul>
-                    {results.map((course) => (
-                        <p key={course.id}>Prerequisites: {course.prereqs}</p>
-                    ))}
+                    <p>Prerequisites: {parentCourse.prereqs}</p>
                 </ul>
                 <div className="top-bar">
-                    <div className="menu-icon">
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                    </div> {/* Add a div for the menu icon */}
+                    <CustomMenu /> {/* Render the CustomMenu component */}
                 </div>
             </div>
         </div>
