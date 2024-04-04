@@ -32,30 +32,85 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
 
     // Process the extracted text to find course names and grades
     const lines = text.split('\n');
-    const courseCompsciLine = /COMPSCI\s+(\d+).*?([A-F][+-]?)(?=\s|\d)/; // extracts only the course name and the associated grade
-    const courseMathLine = /MATH\s+(\d+).*?([A-F][+-]?)(?=\s|\d)/; // extracts only the course name and the associated grade
 
+    const courseCompsciLine = /COMPSCI\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
+    const courseMathLine = /MATH\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
+    const gradeForCoursesWithLettersInNums = /\d+\.\d+([A-Z])\d+\.\d+/; //handles courses with letters attached to course number
     const transcript = [];
-
+    
     lines.forEach(line => {
         console.log('Processing line:', line);
         const csMatch = line.match(courseCompsciLine);
         const mathMatch = line.match(courseMathLine);
-
+        const gradeMatch = line.match(gradeForCoursesWithLettersInNums);
+    
         if (csMatch) {
+            if(csMatch[1] === '198'){
+                transcript.push({
+                    name: "COMPSCI 198C",
+                    grade: gradeMatch[1]
+                });
+            }
+            else if(csMatch[1] === '291'){
+                transcript.push({
+                    name: "COMPSCI 291T",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else if(csMatch[1] === '298'){
+                transcript.push({
+                    name: "COMPSCI 298A",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else if(csMatch[1] === '490'){
+                transcript.push({
+                    name: "COMPSCI 490Q",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else if(csMatch[1] === '590'){
+                transcript.push({
+                    name: "COMPSCI 590X",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else if(csMatch[1] === '596'){
+                transcript.push({
+                    name: "COMPSCI 596E",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else if(csMatch[1] === '690'){
+                transcript.push({
+                    name: "COMPSCI 690K",
+                    grade: gradeMatch[1]
+                });
+            }
+    
+            else{
             transcript.push({
                 name: `COMPSCI ${csMatch[1]}`,
                 grade: csMatch[2]
             });
+            }
         }
+    
         if (mathMatch) {
             transcript.push({
                 name: `MATH ${mathMatch[1]}`,
                 grade: mathMatch[2]
             });
         }
+    
+    
     });
-
+    
     console.log('transcript', transcript);
 
     res.json({ message: 'File uploaded successfully', transcript: transcript });  // Respond with extracted text and transcript
