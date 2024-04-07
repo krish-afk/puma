@@ -26,9 +26,10 @@ export default function Search(props) {
     }
   };
 
-   // Mocked options for autocomplete
-  const options = ['CS110', 'CS160', 'CS208', 'CS220', 'CS230', 'CS237', 'CS240', 'CS250', 'CS256', 'CS291T', 'CS298A', 'CS305', 'CS311', 'CS320', 'CS325', 'CS187', 'CS198C']
-
+    // Mocked options for autocomplete --> based off Fall 2024 classes
+  const options = ['CICS110', 'CICS160', 'CICS208', 'CICS210', 'CICS237', 'CICS256', 'CICS291T', 'CICS298A', 'CICS305', 'CICS580', 'CS119', 'CS198C', 'CS220', 'CS230',  'CS240', 'CS250', 'CS311', 'CS320', 'CS325', 'CS326', 
+                  'CS328', 'CS335', 'CS345', 'CS363', 'CS377', 'CS383', 'CS410', 'CS420', 'CS429', 'CS445', 'CS446', 'CS453', 'CS461', 'CS490Q', 'CS514', 'CS515', 'CS520', 'CS528', 'CS532', 'CS560', 'CS563', 'CS575', 'CS589',
+                  'CS590X', 'CS596E', 'CS602', 'CS610', 'CS611', 'CS646', 'CS646', 'CS648', 'CS653', 'CS655', 'CS660', 'CS661', 'CS666', 'CS670', 'CS677', 'CS682', 'CS685', 'CS687', 'CS688', 'CS689', 'CS690K', 'CS692P', 'CS692X', 'CS698W']
   // For filtering the search --> doesn't work yet 
   const filteredOptions = options.filter(option => {
     const searchParts = query.toLowerCase().split(' ').filter(part => part.trim() !== ''); // Split search query by spaces and filter out empty parts
