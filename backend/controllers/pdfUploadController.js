@@ -34,6 +34,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
     const lines = text.split('\n');
 
     const courseCompsciLine = /COMPSCI\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
+    const courseCICSLine = /CICS\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
     const courseMathLine = /MATH\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
     const gradeForCoursesWithLettersInNums = /\d+\.\d+([A-Z])\d+\.\d+/; //handles courses with letters attached to course number
     const transcript = [];
@@ -43,6 +44,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
         const csMatch = line.match(courseCompsciLine);
         const mathMatch = line.match(courseMathLine);
         const gradeMatch = line.match(gradeForCoursesWithLettersInNums);
+        const cicsMatch = line.match(courseCICSLine);
     
         if (csMatch) {
             if(csMatch[1] === '198'){
@@ -51,20 +53,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
                     grade: gradeMatch[1]
                 });
             }
-            else if(csMatch[1] === '291'){
-                transcript.push({
-                    name: "COMPSCI 291T",
-                    grade: gradeMatch[1]
-                });
-            }
-    
-            else if(csMatch[1] === '298'){
-                transcript.push({
-                    name: "COMPSCI 298A",
-                    grade: gradeMatch[1]
-                });
-            }
-    
+            
             else if(csMatch[1] === '490'){
                 transcript.push({
                     name: "COMPSCI 490Q",
@@ -100,6 +89,29 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
             });
             }
         }
+
+        if(cicsMatch){
+            if(cicsMatch[1] === '291'){
+                transcript.push({
+                    name: "CICS 291T",
+                    grade: gradeMatch[1]
+                });
+            }
+
+            else if(cicsMatch[1] === '298'){
+                transcript.push({
+                    name: "CICS 298A",
+                    grade: gradeMatch[1]
+                });
+            }
+            
+            else{
+                transcript.push({
+                    name: `CICS ${csMatch[1]}`,
+                    grade: csMatch[2]
+                });
+            }
+        }
     
         if (mathMatch) {
             transcript.push({
@@ -107,8 +119,6 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
                 grade: mathMatch[2]
             });
         }
-    
-    
     });
     
     console.log('transcript', transcript);
