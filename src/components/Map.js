@@ -4,13 +4,19 @@ import "@fontsource/league-spartan/800.css";
 import Course from './CourseClass';
 import axios from 'axios';
 import './Tree.css';
+import { useParams } from 'react-router-dom';
+
 
 var treeData = []
 
-const searchResult = 'CS709'; // hard coded but doesn't have to be
-
 
 export default function Map() {
+    const { query } = useParams();
+
+    const searchQuery = query.toUpperCase();
+
+    //const searchResult = 'CICS110'; // hard coded but doesn't have to be
+
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     
@@ -18,8 +24,9 @@ export default function Map() {
         const fetchData = async (searchCourse) => {
             try {
                 console.log("Searching");
+                console.log(searchCourse)
                 const response = await axios.get('http://localhost:8000/getClass?course='+searchCourse);
-                //console.log(response.data);
+                console.log(response.data);
                 //console.log(response.data.courseInfo.Prerequisites)
                 
 
@@ -30,6 +37,7 @@ export default function Map() {
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
                 console.error('Error searching:', error);
+                setLoading(false); // Make sure to set loading to false in case of error
             }
         };
 
@@ -47,7 +55,7 @@ export default function Map() {
                 console.error('Error searching:', error);
             }
         };
-        fetchData(searchResult);
+        fetchData(searchQuery);
     }, []);
 
 
