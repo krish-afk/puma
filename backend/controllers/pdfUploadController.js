@@ -1,9 +1,8 @@
-const express = require('express');
+
 const multer = require('multer'); // middleware for handling file uploads
 const pdfParse = require('pdf-parse'); // used to parse the PDF and extract text
-
+const router = express.Router(); // creates a router instance
 // Initialize express and multer
-const app = express(); // initializes express application to set up server
 const upload = multer(); // no need to specify a destination for multer, as we won't be storing the file
 
 // Function to extract text from a PDF file at a given file buffer
@@ -18,7 +17,7 @@ const extractTextFromPDF = async (fileBuffer) => {
 };
 
 // Define a route to upload and process a PDF file
-app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines a POST route on the upload endpoint of the server, processing a single file named 'file'
+router.post('/upload-pdf', upload.single('file'), async (req, res) => {// defines a router 
     const fileBuffer = req.file.buffer; // retrieves file buffer from request obj populated by multer
     if (!fileBuffer) {
         return res.status(400).send({ message: 'Please upload a file.' }); // if file buffer is missing
@@ -36,7 +35,8 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
     const courseCompsciLine = /COMPSCI\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
     const courseCICSLine = /CICS\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
     const courseMathLine = /MATH\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ //extracts only the course name and the associated grade
-    const gradeForCoursesWithLettersInNums = /\d+\.\d+([A-Z])\d+\.\d+/; //handles courses with letters attached to course number
+    const gradeForCoursesWithLettersInNums = /\d+\.\d+([A-Z])\d+\.\d+/ //handles courses with letters attached to course number
+    const gradeForJrYearWriting = /ENGLWRIT\s+([A-Z]?\d+).*?([A-F][+-]?)(?=\s|\d)/ 
     const transcript = [];
     
     lines.forEach(line => {
@@ -45,46 +45,56 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
         const mathMatch = line.match(courseMathLine);
         const gradeMatch = line.match(gradeForCoursesWithLettersInNums);
         const cicsMatch = line.match(courseCICSLine);
+        const englMatch = line.match(gradeForJrYearWriting);
+
+        if(englMatch){
+            if(csMatch[1] === '112'){
+                transcript.push({
+                    name: "ENGLWRIT112",
+                    grade: gradeMatch[1]
+            });
+            }
+        }
     
         if (csMatch) {
             if(csMatch[1] === '198'){
                 transcript.push({
-                    name: "COMPSCI 198C",
+                    name: "CS198C",
                     grade: gradeMatch[1]
                 });
             }
             
             else if(csMatch[1] === '490'){
                 transcript.push({
-                    name: "COMPSCI 490Q",
+                    name: "CS490Q",
                     grade: gradeMatch[1]
                 });
             }
     
             else if(csMatch[1] === '590'){
                 transcript.push({
-                    name: "COMPSCI 590X",
+                    name: "CS590X",
                     grade: gradeMatch[1]
                 });
             }
     
             else if(csMatch[1] === '596'){
                 transcript.push({
-                    name: "COMPSCI 596E",
+                    name: "CS596E",
                     grade: gradeMatch[1]
                 });
             }
     
             else if(csMatch[1] === '690'){
                 transcript.push({
-                    name: "COMPSCI 690K",
+                    name: "CS690K",
                     grade: gradeMatch[1]
                 });
             }
     
             else{
             transcript.push({
-                name: `COMPSCI ${csMatch[1]}`,
+                name: `CS${csMatch[1]}`,
                 grade: csMatch[2]
             });
             }
@@ -93,21 +103,21 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
         if(cicsMatch){
             if(cicsMatch[1] === '291'){
                 transcript.push({
-                    name: "CICS 291T",
+                    name: "CICS91T",
                     grade: gradeMatch[1]
                 });
             }
 
             else if(cicsMatch[1] === '298'){
                 transcript.push({
-                    name: "CICS 298A",
+                    name: "CICS298A",
                     grade: gradeMatch[1]
                 });
             }
             
             else{
                 transcript.push({
-                    name: `CICS ${csMatch[1]}`,
+                    name: `CICS${csMatch[1]}`,
                     grade: csMatch[2]
                 });
             }
@@ -115,7 +125,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
     
         if (mathMatch) {
             transcript.push({
-                name: `MATH ${mathMatch[1]}`,
+                name: `MATH${mathMatch[1]}`,
                 grade: mathMatch[2]
             });
         }
@@ -126,8 +136,7 @@ app.post('/upload-pdf', upload.single('file'), async (req, res) => { // defines 
     res.json({ message: 'File uploaded successfully', transcript: transcript });  // Respond with extracted text and transcript
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000'); // starts the server
-});
+module.exports = router;
+
 
 
