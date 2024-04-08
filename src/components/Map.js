@@ -6,77 +6,49 @@ import axios from 'axios';
 import './Tree.css';
 import { useParams } from 'react-router-dom';
 
-
 var treeData = []
 
-
 export default function Map() {
-    const { query } = useParams();
-
-    const searchQuery = query.toUpperCase();
-
-    //const searchResult = 'CICS110'; // hard coded but doesn't have to be
-
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
+    const [treeReady, setTreeReady] = useState(false); 
+
+    const { query } = useParams();
+    const searchResult = query.toUpperCase();
     
     useEffect(() => {
         const fetchData = async (searchCourse) => {
             try {
-                console.log("Searching");
-                console.log(searchCourse)
                 const response = await axios.get('http://localhost:8000/getClass?course='+searchCourse);
-                console.log(response.data);
-                //console.log(response.data.courseInfo.Prerequisites)
-                
-
-                response.data.courseInfo.Prerequisites = await response.data.courseInfo.Prerequisites.forEach(e => fetchChildCourse(e));
-                console.log(response.data.courseInfo.Prerequisites)
-                
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
                 console.error('Error searching:', error);
-                setLoading(false); // Make sure to set loading to false in case of error
             }
         };
-
-        const fetchChildCourse = async (searchCourse) => {
-            try {
-                console.log("Searching for prereq");
-                const response = await axios.get('http://localhost:8000/getClass?course='+searchCourse);
-                
-                if (response.data.courseInfo.Prerequisites.length !== 0){
-                    response.data.courseInfo.Prerequisites = await response.data.courseInfo.Prerequisites.forEach(e => fetchChildCourse(e));
-                }
-                return response.data;
-
-            } catch (error) {
-                console.error('Error searching:', error);
-            }
-        };
-        fetchData(searchQuery);
+        fetchData(searchResult);
     }, []);
-
-
+    useEffect(() => {
+        if (!loading && result.courseInfo) {
+            createTree(result.courseInfo).then(() => {
+                setTreeReady(true); // Set tree ready state to true after creating the tree
+            });
+        }
+    }, [loading, result]);
+    //thus far, we have queried for the required class
     if (loading) {
         // Render loading state while data is being fetched
         return <div>Loading...</div>;
     }
-
-    // Check if result and result.courseInfo exist before accessing Prerequisites
+    if (!treeReady) {
+        return null; // Don't render anything until the tree is ready
+    }
+    //rendered loading state if loading
     var prereqs = result && result.courseInfo ? result.courseInfo.Prerequisites : [];
-    //console.log("PPREREQ", prereqs);
-
-    // example that would be returned in query:
     var courseName = result && result.courseInfo ? result.courseInfo.Name : "";
-    var parentCourse = new Course(220, "CS", "Programming Methodology", "...", prereqs && prereqs.length > 0 ? prereqs[0][0] : []);
-
-    console.log(result.courseInfo.Prerequisites)
-    createTree(result.courseInfo);
-
+    var parentCourse = new Course(709, "CS", "Bizarre Foods", "...", prereqs && prereqs.length > 0 ? prereqs[0][0] : []);
+    //createTree(result.courseInfo);
     const results = [parentCourse];
-    //console.log(result)
     return (
         <div className="prereq-list">
             <ul>
@@ -107,35 +79,62 @@ export default function Map() {
     );
 }
 
-function createTree(courseInfo){
-   treeData = [];
-   treeData.push(createNode(courseInfo));
+async function createTree(courseInfo) {
+    try {
+        //treeData.push(await createNode(courseInfo));
+        var respite = await createNode(courseInfo)
+        treeData.push(respite)
+    } catch (error) {
+        console.error('Error creating tree:', error);
+    }
 }
 
-function createNode(courseInfo){
-    
-    if (courseInfo.Prerequisites = []){ // should be (courseInfo.Prerequisites.length === 0){ 
+const createNode = async (courseInfo) => {
+    if(courseInfo.Prerequisites.length === 0){
         return {
-            id: courseInfo.id,
+            id: courseInfo._id,
             name: courseInfo.Name,
             diamond: false,
             children: []
-        }
+        };
     }
     else{
-        var prereqs = [];
-        courseInfo.Prerequisites.forEach(course => prereqs.push(createNode(course)));
+    try {
+        var Prereqs = [];
+        // Create an array to store promises for fetching prerequisite courses
+        const promises = [];
+        for (let i = 0; i < courseInfo.Prerequisites.length; ++i) {
+            let list = courseInfo.Prerequisites[i];
+            for (let j = 0; j < courseInfo.Prerequisites[i].length; ++j) {
+                // Push each promise to the array
+                let link = 'http://localhost:8000/getClass?course=' + courseInfo.Prerequisites[i][j][0]
+                promises.push(axios.get(link));
+            }
+        }
+        // Wait for all promises to resolve using Promise.all
+        const responses = await Promise.all(promises);
+        // Process the responses to create prerequisite nodes
+        //console.log(responses[0].data.courseInfo.Name)
+        let obj1 = createNode(responses[0].data.courseInfo)
+        Prereqs = await Promise.all(responses.map(resp => createNode(resp.data.courseInfo)));
         return {
-            id: courseInfo.id,
-            name: courseInfo.name,
+            id: courseInfo._id,
+            name: courseInfo.Name,
             diamond: false,
-            children: prereqs
+            children: Prereqs
+        };
+    } catch (error) { // Handle errors gracefully
+        return {
+            id: courseInfo._id,
+            name: courseInfo.Name,
+            diamond: false,
+            children: []
+        };
         }
     }
 }
-
+//console.log("This is treeData " + treeData.length)
 const treeRendering = (treeData) => {
-    
     return (
         <ul>
         {
@@ -158,7 +157,7 @@ const treeRendering = (treeData) => {
 var exampleTreeData = [
     {
         id: 'CS311',
-        name: 'Algorit.hms',
+        name: 'Algorithms',
         diamond: false,
         children:[
             {
