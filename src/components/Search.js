@@ -32,12 +32,16 @@ export default function Search(props) {
                   'CS590X', 'CS596E', 'CS602', 'CS610', 'CS611', 'CS646', 'CS648', 'CS653', 'CS655', 'CS660', 'CS661', 'CS666', 'CS670', 'CS677', 'CS682', 'CS685', 'CS687', 'CS688', 'CS689', 'CS690K', 'CS692P', 'CS692X', 'CS698W']
   // For filtering the search --> doesn't work yet 
   const filteredOptions = options.filter(option => {
-    const searchParts = query.toLowerCase().split(' ').filter(part => part.trim() !== ''); // Split search query by spaces and filter out empty parts
-    return searchParts.every(part =>
-      option.toLowerCase().includes(part)
-    );
+    const formattedQuery = query.toLowerCase().replace(/\s/g, '');
+    const formattedOption = option.toLowerCase().replace(/\s/g, '');
+    console.log(formattedQuery)
+    const includesQuery = formattedOption.includes(formattedQuery);
+    console.log(`Option: ${option}, Formatted Option: ${formattedOption}, Includes Query: ${includesQuery}`);
+    return formattedOption.includes(formattedQuery);
   });
   
+  console.log('Filtered options:', filteredOptions); // Log filtered options to console
+
   return (
     <div className="container">
       <img src="../../Puma.png" className="pumaLogo" alt="Puma Logo" />
