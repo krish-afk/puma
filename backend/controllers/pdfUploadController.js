@@ -6,7 +6,7 @@ const router = express.Router(); // creates a router instance
 const upload = multer(); // no need to specify a destination for multer, as we won't be storing the file
 
 // Function to extract text from a PDF file at a given file buffer
-const extractTextFromPDF = async (fileBuffer) => {
+exports.extractTextFromPDF = async (fileBuffer) => {
     try {
         const data = await pdfParse(fileBuffer); // parses the PDF to extract text
         return data.text; // returns the extracted text
@@ -60,6 +60,27 @@ router.post('/upload-pdf', upload.single('file'), async (req, res) => {// define
             if(csMatch[1] === '198'){
                 transcript.push({
                     name: "CS198C",
+                    grade: gradeMatch[1]
+                });
+            }
+
+            else if(csMatch[1] === '186'){
+                transcript.push({
+                    name: "CS160",
+                    grade: gradeMatch[1]
+                });
+            }
+
+            else if(csMatch[1] === '187'){
+                transcript.push({
+                    name: "CS210",
+                    grade: gradeMatch[1]
+                });
+            }
+
+            else if(csMatch[1] === '121'){
+                transcript.push({
+                    name: "CS110",
                     grade: gradeMatch[1]
                 });
             }
