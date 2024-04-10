@@ -9,7 +9,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-
 function App() {
                                              
   return (
@@ -28,7 +27,7 @@ function App() {
         />
         <Route
         exact
-        path='/map'
+        path="/map/:query"
         element={<Map />}
         /> 
       </Routes>
@@ -38,5 +37,4 @@ function App() {
 }
 
 export default App;
-
 

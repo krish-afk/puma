@@ -30,3 +30,4 @@ export default function SignUp(props){
         <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} >Sign In </a> </span>
     </div>
 }
+
