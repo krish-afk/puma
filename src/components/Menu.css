@@ -1,0 +1,14 @@
+.menuLink {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+  }
+  
+  .menuButton {
+    cursor: pointer;
+    text-transform: uppercase; /* Convert text to uppercase */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+  }
