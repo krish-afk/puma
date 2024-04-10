@@ -38,6 +38,7 @@ export default function SignUp(props){
             axios.post("https://puma-backend-1.onrender.com/createUser", profile)
             .then(response => 
                 {setError(false)
+                localStorage.setItem('username', username); // Store the username in localStorage
                 history("/search")
             })
             .catch(e=> console.log(e))
@@ -49,7 +50,7 @@ export default function SignUp(props){
         <h1 className='heading-right'><b>Welcome! Sign Up</b></h1>
         {error?<TextField error id="outlined-error" label="Enter a valid username" className="text-username" margin="normal" variant="outlined"  onChange={e=>setUsername(e.target.value)}/> : <TextField  id="outlined-basic" label="Enter Username" variant="outlined"  className="text-username" margin="normal" onChange={e=>setUsername(e.target.value)}/>  }
         {error? <TextField error id="outlined-error" label="Enter a valid password" className="text-password" margin="normal" variant="outlined"  onChange={e=>setPassword(e.target.value)}/> : <TextField id="outlined-basic" label="Enter Password" type="password" variant="outlined"  className="text-password" margin="normal" onChange={e=>setPassword(e.target.value)}/> }
-        <Button className = "file-button" component="label" role={undefined} variant="outlined" tabIndex={-1}> Upload file
+        <Button className = "file-button" component="label" role={undefined} variant="outlined" tabIndex={-1}> Upload PDF Transcript
         <VisuallyHiddenInput type="file" /> </Button>
         <button className="submit-sign-up" onClick={handleSignup} >Sign Up</button>
         <br/>
