@@ -20,7 +20,7 @@ export default function Map() {
     useEffect(() => {
         const fetchData = async (searchCourse) => {
             try {
-                const response = await axios.get('http://localhost:8000/getClass?course='+searchCourse);
+                const response = await axios.get('https://puma-backend-1.onrender.com/getClass?course='+searchCourse);
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
@@ -104,7 +104,7 @@ const createNode = async (courseInfo) => {
             let list = courseInfo.Prerequisites[i];
             for (let j = 0; j < courseInfo.Prerequisites[i].length; ++j) {
                 // Push each promise to the array
-                let link = 'http://localhost:8000/getClass?course=' + courseInfo.Prerequisites[i][j][0]
+                let link = 'https://puma-backend-1.onrender.com/getClass?course=' + courseInfo.Prerequisites[i][j][0]
                 promises.push(axios.get(link));
             }
         }
