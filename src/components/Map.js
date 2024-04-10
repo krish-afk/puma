@@ -70,11 +70,6 @@ export default function Map() {
                 </ul>
                 <div className="top-bar">
                     <CustomMenu />
-                    <div className="menu-icon">
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                    </div> {/* Add a div for the menu icon */}
                 </div>
             </div>
         </div>
