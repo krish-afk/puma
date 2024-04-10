@@ -35,7 +35,7 @@ export default function SignUp(props){
         else{
             //send to DB
             let profile = {"Username": username, "Password": password, "SpireID": "33848292"}
-            axios.post("http://localhost:8000/createUser", profile)
+            axios.post("https://puma-backend-1.onrender.com/createUser", profile)
             .then(response => 
                 {setError(false)
                 history("/search")
