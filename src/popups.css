@@ -1,0 +1,46 @@
+*,*::after, *::before {
+    box-sizing: boder-box;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 2px;
+    z-index: 200;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+
+}
+
+.popup-header {
+  padding: 10px, 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+
+}
+
+
+.popup-body {
+    padding: 10px, 15px;
+}
+
+#overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rdba(0, 0, 0, .5);
+}
+
+
+
+
+
+
+
