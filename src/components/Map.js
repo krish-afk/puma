@@ -52,6 +52,17 @@ export default function Map() {
                         <p key={course.id}>Prerequisites: {course.prereqs}</p>
                     ))}
                 </ul>
+                <button class="popup" onClick="openPopup()">Course Description</button>
+                <div class= "popup" id='popup1'>
+                    <div class= "popup-header">Course Description</div>
+                    <div className="popup-body">{result.courseInfo ? result.courseInfo.description : 'Course Information not avaliable at this time'}</div>
+                </div>
+                <script>
+                   function openPopup() {
+                     document.getElementById("popup1").classList.toggle("show")
+                   }
+                </script>
+                <div id="overlay"></div>
                 <div className="top-bar">
                     <div className="menu-icon">
                         <div className="menu-line"></div>
