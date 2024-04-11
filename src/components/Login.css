@@ -31,15 +31,6 @@
 
 }
 
-.forgot-password{
-    margin-top: 0px;
-    font-size: 75%;
-    display: flex;
-    justify-content: end;
-    margin-bottom: 20px;
-    margin-right: 18%;
-
-}
 .submit-log-in{
     background-color: rgb(191,201,254);
     color:white;
