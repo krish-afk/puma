@@ -103,7 +103,7 @@ export default function Map() {
             {popupActive && (
                 <div className="popup">
                     <div className="popup-content">
-                        <span className="title">Course Summary</span>
+                        <span className="title">{result.courseInfo.Name}</span>
                         <button className="close" onClick={closePopup}>&times;</button>
                         <div className="popup-body">{result.courseInfo.Description}</div>
                     </div>
