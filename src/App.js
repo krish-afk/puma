@@ -29,7 +29,7 @@ function App() {
         <Route
         exact
         path='/map/:query'
-        element={<Map />}
+        element={<Map/>}
         /> 
       </Routes>
     </Router>

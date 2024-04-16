@@ -16,11 +16,10 @@ export default function Map() {
 
     const { query } = useParams();
     const searchResult = query.toUpperCase();
-    
     useEffect(() => {
         const fetchData = async (searchCourse) => {
             try {
-                const response = await axios.get('https://puma-backend-1.onrender.com/getClass?course='+searchCourse);
+                const response = await axios.get('https://puma-backend-1.onrender.com/courses/getClass?course='+searchCourse);
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
@@ -30,8 +29,9 @@ export default function Map() {
         fetchData(searchResult);
     }, []);
     useEffect(() => {
-        if (!loading && result.courseInfo) {
-            createTree(result.courseInfo).then(() => {
+        if (!loading && result) {
+         
+            createTree(result).then(() => {
                 setTreeReady(true); // Set tree ready state to true after creating the tree
             });
         }
@@ -45,8 +45,8 @@ export default function Map() {
         return null; // Don't render anything until the tree is ready
     }
     //rendered loading state if loading
-    var prereqs = result && result.courseInfo ? result.courseInfo.Prerequisites : [];
-    var courseName = result && result.courseInfo ? result.courseInfo.Name : "";
+    var prereqs = result ? result.Prerequisites : [];
+    var courseName = result ? result.Name : "";
     var parentCourse = new Course(709, "CS", "Bizarre Foods", "...", prereqs && prereqs.length > 0 ? prereqs[0][0] : []);
     //createTree(result.courseInfo);
     const results = [parentCourse];
@@ -104,16 +104,18 @@ const createNode = async (courseInfo) => {
             let list = courseInfo.Prerequisites[i];
             for (let j = 0; j < courseInfo.Prerequisites[i].length; ++j) {
                 // Push each promise to the array
-                let link = 'https://puma-backend-1.onrender.com/getClass?course=' + courseInfo.Prerequisites[i][j][0]
+                let link = 'https://puma-backend-1.onrender.com/courses/getClass?course=' + courseInfo.Prerequisites[i][j][0]
                 promises.push(axios.get(link));
             }
         }
         // Wait for all promises to resolve using Promise.all
         const responses = await Promise.all(promises);
+        console.log(responses)
         // Process the responses to create prerequisite nodes
         //console.log(responses[0].data.courseInfo.Name)
-        let obj1 = createNode(responses[0].data.courseInfo)
-        Prereqs = await Promise.all(responses.map(resp => createNode(resp.data.courseInfo)));
+        
+        let obj1 = createNode(responses[0].data)
+        Prereqs = await Promise.all(responses.map(resp => createNode(resp.data)));
         return {
             id: courseInfo._id,
             name: courseInfo.Name,

@@ -1,7 +1,7 @@
 import './Login.css'
 import "@fontsource/poppins";
 import "@fontsource/poppins/400.css";
-import { useThemeProps } from '@mui/material';
+// import { useThemeProps } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Link,useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -15,12 +15,12 @@ export default function Login(props){
    
     const handleLogin=()=>{
         console.log(error)
-        if(username=="" || password=="" ){
+        if(username==="" || password==="" ){
             setError(true)
         }
         else{
             let profile = {"username": username, "password": password}
-            axios.post("https://puma-backend-1.onrender.com/authenticateUser", profile)
+            axios.post("https://puma-backend-1.onrender.com/students/authenticateUser", profile)
             .then(response => {
                 setError(false)
                 history("/search")
