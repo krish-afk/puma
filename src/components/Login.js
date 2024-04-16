@@ -20,7 +20,7 @@ export default function Login(props){
         }
         else{
             let profile = {"username": username, "password": password}
-            axios.post("http://localhost:8000/students/authenticateUser", profile)
+            axios.post("https://puma-backend-1.onrender.com/students/authenticateUser", profile)
             .then(response => {
                 setError(false)
                 history("/search")
