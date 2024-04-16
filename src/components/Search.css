@@ -1,0 +1,52 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #7080d4; /* Light background color */
+}
+
+.title {
+  font-family: 'League Spartan'; /* Use a Google Font for the title */
+  color: #ffffff; /* Dark text color */
+  margin-bottom: 15px; /* Spacing below the title */
+  font-size: 70px;
+}
+
+.search-div {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  width: 300px; /* Adjust the width of the search bar */
+  margin-right: 10px; /* Add some spacing between search bar and button */
+  border: 5px solid #ccc; /* Change the border to a 2px solid gray */
+  border-radius: 5px; /* Add rounded corners to the border */
+  padding: 8px; /* Add padding inside the search bar */
+}
+
+.search-bar:focus {
+  outline: none; /* Remove the outline when the search bar is focused */
+  border-color: #94b4d6; /* Change the border color to blue when the search bar is focused */
+}
+
+.search-link {
+  text-decoration: none; /* Remove underline from link */
+}
+
+.search-icon {
+  font-size: 50px;
+  border-radius: 100px;
+  background-color: rgb(74, 162, 122);
+  border: none;
+  height: 70%;
+  cursor: pointer;
+}
+
+.search-button {
+  background-color: transparent; /* Make the background transparent */
+  border: none; /* Remove the border */
+}
