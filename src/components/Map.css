@@ -87,7 +87,15 @@
     background-color: rgb(74,162,122);
     margin-left: 10px;
     border: none;
-    height:70%;
+    height:10%;
+  }
+
+  .search-button-map {
+    background-color: transparent; /* Make the background transparent */
+    border: none; /* Remove the border */
+    position:absolute;
+    top:70px;
+    left: 10px;
   }
 
  .prereq-list{
@@ -100,7 +108,7 @@
     background-color: #4aa27a;
     height: 100px; /* Adjust height as needed */
     width: 100%; /* Make the bar span the entire width of the screen */
-    position: fixed; /* Fix the bar at the top of the screen */
+    position: absolute; /* Fix the bar at the top of the screen */
     top: 0; /* Position it at the top */
     left: 0; /* Align it to the left */
     font-family: 'League Spartan'; /* Use a Google Font for the title */

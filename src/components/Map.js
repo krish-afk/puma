@@ -6,6 +6,8 @@ import axios from 'axios';
 import './Tree.css';
 import { useParams } from 'react-router-dom';
 import CustomMenu from './Menu.js'; // Import CustomMenu component
+import SearchIcon from '@mui/icons-material/Search';
+import { Link } from 'react-router-dom';
 
 var treeData = []
 
@@ -70,6 +72,11 @@ export default function Map() {
                 </ul>
                 <div className="top-bar">
                     <CustomMenu />
+                    <Link to={`/search/`}>
+                        <button type="submit" className="search-button-map" onClick="window.location.reload();">
+                            <SearchIcon className="search-icon" style={{ fontSize: 40 }} />
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
@@ -90,7 +97,7 @@ const createNode = async (courseInfo) => {
     if(courseInfo.Prerequisites.length === 0){
         return {
             id: courseInfo._id,
-            name: courseInfo.Name,
+            name: courseInfo.compName,
             diamond: false,
             children: []
         };
@@ -118,14 +125,15 @@ const createNode = async (courseInfo) => {
         Prereqs = await Promise.all(responses.map(resp => createNode(resp.data)));
         return {
             id: courseInfo._id,
-            name: courseInfo.Name,
+            name: courseInfo.compName,
             diamond: false,
             children: Prereqs
         };
     } catch (error) { // Handle errors gracefully
+        console.log("error reached")
         return {
             id: courseInfo._id,
-            name: courseInfo.Name,
+            name: courseInfo.compName,
             diamond: false,
             children: []
         };
