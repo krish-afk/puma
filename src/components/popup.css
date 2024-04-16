@@ -7,23 +7,6 @@
     box-sizing: border-box;
 }
 
-.button {
-  padding: 5px 25px;
-  background: #66CCFF;
-  border: 10;
-  outline: none;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 200;
-  border:#66CCFF;
-  color: white;
-  border-radius: 10px;
-  position: absolute; 
-  top: 80%; 
-  left: 20%;
-  transform: translate(-50%, -50%);
-}
-
 .popup .text {
     position: fixed;
     width: 500px;
