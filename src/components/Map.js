@@ -104,7 +104,7 @@ const createNode = async (courseInfo) => {
             let list = courseInfo.Prerequisites[i];
             for (let j = 0; j < courseInfo.Prerequisites[i].length; ++j) {
                 // Push each promise to the array
-                let link = 'http://localhost:8000/courses/getClass?course=' + courseInfo.Prerequisites[i][j][0]
+                let link = 'https://puma-backend-1.onrender.com/courses/getClass?course=' + courseInfo.Prerequisites[i][j][0]
                 promises.push(axios.get(link));
             }
         }
