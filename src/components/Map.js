@@ -19,7 +19,7 @@ export default function Map() {
     useEffect(() => {
         const fetchData = async (searchCourse) => {
             try {
-                const response = await axios.get('http://localhost:8000/courses/getClass?course='+searchCourse);
+                const response = await axios.get('https://puma-backend-1.onrender.com/courses/getClass?course='+searchCourse);
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
