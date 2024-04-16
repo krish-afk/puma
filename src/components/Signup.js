@@ -36,14 +36,14 @@ export default function SignUp(props){
             try {
                 // Send to DB
                 let profile = {"Username": username, "Password": password, "SpireID": "33848292"};
-                await axios.post("https://puma-backend-1.onrender.com/createUser", profile);
+                await axios.post("http://localhost:8000/students/createUser", profile);
                 
                 // Upload the transcript if a file is selected
                 if (file) {
                     const formData = new FormData();
                     formData.append('username', username);
                     formData.append('file', file);
-                    await axios.post('https://puma-backend-1.onrender.com/transcripts/uploadTranscript', formData);
+                    await axios.post('http://localhost:8000/transcripts/uploadTranscript', formData);
                 }
     
                 setError(false);
@@ -66,7 +66,7 @@ export default function SignUp(props){
         </Button>
         <button className="submit-sign-up" onClick={handleSignup}>Sign Up</button>
         <br/>
-       <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} >Sign in </a> </span>
+       <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} > Log in </a> </span>
     </div>;
 }
 
