@@ -18,6 +18,10 @@
   border:#66CCFF;
   color: white;
   border-radius: 10px;
+  position: absolute; 
+  top: 80%; 
+  left: 20%;
+  transform: translate(-50%, -50%);
 }
 
 .popup .text {
