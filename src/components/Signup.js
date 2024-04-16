@@ -66,7 +66,7 @@ export default function SignUp(props){
         </Button>
         <button className="submit-sign-up" onClick={handleSignup}>Sign Up</button>
         <br/>
-        <span className='login'>Already registered? <Link to="/signin">Sign in</Link> </span>
+       <span className='login'>Already registered? <a href="" onClick={props.onRegisterChange} >Sign in </a> </span>
     </div>;
 }
 
