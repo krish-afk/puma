@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test-ct": "playwright test -c playwright-ct.config.js"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@playwright/experimental-ct-react": "^1.43.1",
+    "@types/node": "^20.12.7"
   }
 }
