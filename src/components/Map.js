@@ -16,10 +16,8 @@ export default function Map() {
     const [loading, setLoading] = useState(true); // Add loading state
     const [treeReady, setTreeReady] = useState(false); 
     const [popupActive, setPopupActive] = useState(false);
+    const [clickedClass, setClickedClass] = useState(null);
     
-    
-   
-
     const { query } = useParams();
     const searchResult = query.toUpperCase();
     useEffect(() => {
@@ -43,10 +41,9 @@ export default function Map() {
         }
     }, [loading, result]);
     
-    const openPopup = (item) => {
+    const openPopup = (clickedClass) => {
+        setClickedClass(clickedClass);
         setPopupActive(true);
-         
-        
 
     };
 
@@ -83,17 +80,16 @@ export default function Map() {
                 </div>
 
 
-                {popupActive && (
+                {popupActive && clickedClass && (
                    <div className="popup">
                      <div className="popup-content">
-                     <span className="popup-header">{result.Name}</span>
+                     <span className="popup-header">{clickedClass.name}</span>
                      <button className="close" onClick={closePopup}>&times;</button>
-                     <div className="popup-body">{result.Description}</div>
+                     <div className="popup-body">{clickedClass.description}</div>
                      </div>
                      
                    </div>
                 )}
-                   
 
 
                 <ul>
@@ -124,6 +120,7 @@ const createNode = async (courseInfo) => {
         return {
             id: courseInfo._id,
             name: courseInfo.Name,
+            description: courseInfo.Description,
             diamond: false,
             children: []
         };
@@ -152,6 +149,7 @@ const createNode = async (courseInfo) => {
         return {
             id: courseInfo._id,
             name: courseInfo.Name,
+            description: courseInfo.Description,
             diamond: false,
             children: Prereqs
         };
@@ -159,6 +157,7 @@ const createNode = async (courseInfo) => {
         return {
             id: courseInfo._id,
             name: courseInfo.Name,
+            description: courseInfo.Description,
             diamond: false,
             children: []
         };
@@ -172,7 +171,7 @@ const treeRendering = (treeData, openPopup) => {
         {
             treeData.map((item)=>                
                 <button onClick={() => openPopup(item)}  className="popbutton">
-
+                    
                  
                     <div>{item.name}</div>
                     {
@@ -180,6 +179,7 @@ const treeRendering = (treeData, openPopup) => {
                         treeRendering(item.children, openPopup)
                         :''
                     }
+
                 </button>
             )                    
         }
