@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import "@fontsource/league-spartan/800.css";
 import Course from './CourseClass';
 import axios from 'axios';
-import './tree.css';
+import './Tree.css';
 import { useParams } from 'react-router-dom';
 import CustomMenu from './Menu.js'; // Import CustomMenu component
 
@@ -16,7 +16,9 @@ export default function Map() {
     const [loading, setLoading] = useState(true); // Add loading state
     const [treeReady, setTreeReady] = useState(false); 
     const [popupActive, setPopupActive] = useState(false);
-    const [selectedClass, setSelectedClass] = useState(null);
+    
+    
+   
 
     const { query } = useParams();
     const searchResult = query.toUpperCase();
@@ -43,7 +45,8 @@ export default function Map() {
     
     const openPopup = (item) => {
         setPopupActive(true);
-        setSelectedClass(item);
+         
+        
 
     };
 
@@ -83,13 +86,15 @@ export default function Map() {
                 {popupActive && (
                    <div className="popup">
                      <div className="popup-content">
-                     <span className="title">{selectedClass.Name}</span>
+                     <span className="popup-header">{result.Name}</span>
                      <button className="close" onClick={closePopup}>&times;</button>
-                     <div className="popup-body">{selectedClass.Description}</div>
+                     <div className="popup-body">{result.Description}</div>
                      </div>
                      
                    </div>
                 )}
+                   
+
 
                 <ul>
                     {results.map((course) => (
@@ -166,8 +171,9 @@ const treeRendering = (treeData, openPopup) => {
         <ul>
         {
             treeData.map((item)=>                
-                <button onClick={() => openPopup(item)} className={item.name+item.id}>
-                    
+                <button onClick={() => openPopup(item)}  className="popbutton">
+
+                 
                     <div>{item.name}</div>
                     {
                         item.children && item.children.length ?
@@ -180,7 +186,5 @@ const treeRendering = (treeData, openPopup) => {
         </ul>
     )
 }
-        </ul>
-    )
-}
+
 
