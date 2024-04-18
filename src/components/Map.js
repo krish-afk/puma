@@ -4,19 +4,24 @@ import "@fontsource/league-spartan/800.css";
 import Course from './CourseClass';
 import axios from 'axios';
 import './Tree.css';
+import { useParams } from 'react-router-dom';
+import CustomMenu from './Menu.js'; // Import CustomMenu component
+import { AssessmentRounded } from '@mui/icons-material';
 
 var treeData = []
-const searchResult = 'CICS110'; 
 
 export default function Map() {
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     const [treeReady, setTreeReady] = useState(false); 
+
+    const { query } = useParams();
+    const searchResult = query.toUpperCase();
     
     useEffect(() => {
         const fetchData = async (searchCourse) => {
             try {
-                const response = await axios.get('http://localhost:8000/getClass?course='+searchCourse);
+                const response = queryDB(searchCourse)
                 setResults(response.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
@@ -65,15 +70,21 @@ export default function Map() {
                     ))}
                 </ul>
                 <div className="top-bar">
-                    <div className="menu-icon">
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                        <div className="menu-line"></div>
-                    </div> {/* Add a div for the menu icon */}
+                    <CustomMenu />
                 </div>
             </div>
         </div>
     );
+}
+
+async function queryDB (searchName){
+    try{
+    const resp = await axios.get('https://puma-backend-1.onrender.com/getClass?course='+searchName);
+    return resp
+    }
+    catch (error){
+        console.error("This course does not exist in the database/the syntax for calling it is wrong")
+    }
 }
 
 async function createTree(courseInfo) {
@@ -104,7 +115,7 @@ const createNode = async (courseInfo) => {
             let list = courseInfo.Prerequisites[i];
             for (let j = 0; j < courseInfo.Prerequisites[i].length; ++j) {
                 // Push each promise to the array
-                let link = 'http://localhost:8000/getClass?course=' + courseInfo.Prerequisites[i][j][0]
+                let link = 'https://puma-backend-1.onrender.com/getClass?course=' + courseInfo.Prerequisites[i][j][0]
                 promises.push(axios.get(link));
             }
         }
@@ -150,45 +161,4 @@ const treeRendering = (treeData) => {
     )
 }
 
-/*
-var exampleTreeData = [
-    {
-        id: 'CS311',
-        name: 'Algorithms',
-        diamond: false,
-        children:[
-            {
-                id:'CS250',
-                name:'Barrington Class',
-                diamond: false,
-                children:[
-                    {
-                        id:'CS160',
-                        name:'',
-                        diamond: false,
-                        children:[
-                            {
-                                id:'CS110',
-                                name:'',
-                                diamond: false,
-                            }
-                        ]
-                    },
-                    {
-                        id:'M132',
-                        name:'',
-                        diamond: false,
-                        children:[
-                            {
-                                id:'M131',
-                                name:'',
-                                diamond: false,
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-]
-*/
+module.exports = map
