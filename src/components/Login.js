@@ -35,10 +35,10 @@ export default function Login(props){
 
     return <div className='Login-page'>
         <h3 className='heading-right'>Log in</h3>
-        {error?<TextField error id="outlined-error" label="Enter a valid username" className="text-username" margin="normal" variant="outlined"  onChange={e=>setUsername(e.target.value)}/> : <TextField  id="outlined-basic" label="Enter Username" variant="outlined"  className="text-username" margin="normal" onChange={e=>setUsername(e.target.value)}/>  }
-        {error? <TextField error id="outlined-error" label="Enter a valid password" className="text-password" margin="normal" variant="outlined"  onChange={e=>setPassword(e.target.value)}/> : <TextField id="outlined-basic" label="Enter Password" type="password" variant="outlined"  className="text-password" margin="normal" onChange={e=>setPassword(e.target.value)}/> }
+        {error?<TextField error id="outlined-error" label="Enter a valid username" className="text-username" margin="normal" variant="outlined"  onChange={e=>setUsername(e.target.value)}/> : <TextField  id="usernameBox" label="Enter Username" variant="outlined"  className="text-username" margin="normal" onChange={e=>setUsername(e.target.value)}/>  }
+        {error? <TextField error id="outlined-error" label="Enter a valid password" className="text-password" margin="normal" variant="outlined"  onChange={e=>setPassword(e.target.value)}/> : <TextField id="passwordBox" label="Enter Password" type="password" variant="outlined"  className="text-password" margin="normal" onChange={e=>setPassword(e.target.value)}/> }
         <br/>
-        <button className="submit-log-in" onClick={handleLogin}>Log In</button>
-        <span className='signup'>Don't have an account? <a  href="" onClick={props.onRegisterChange}> Sign up</a> </span>
+        <button className="submit-log-in" onClick={handleLogin} id="loginBox">Log In</button>
+        <span className='signup' id="signupNote">Don't have an account? <a id="signupLink" href="" onClick={props.onRegisterChange}> Sign up</a> </span>
     </div>
 }
