@@ -23,6 +23,7 @@ export default function Login(props){
             axios.post("https://puma-backend-1.onrender.com/students/authenticateUser", profile)
             .then(response => {
                 setError(false)
+                props.getUsername(username)
                 history("/search")
             })
             .catch(e => {
@@ -42,3 +43,4 @@ export default function Login(props){
         <span className='signup' id="signupNote">Don't have an account? <a id="signupLink" href="" onClick={props.onRegisterChange}> Sign up</a> </span>
     </div>
 }
+
