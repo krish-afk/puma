@@ -1,4 +1,3 @@
-
 import './popups.css';
 import './Map.css';
 import { useState, useEffect } from 'react';
@@ -51,6 +50,29 @@ export default function Map() {
         setPopupActive(false);
     };
 
+
+
+
+
+    const renderChildDescriptions = (clickedClass) => {
+        if (!clickedClass.children || clickedClass.children.length === 0) {
+          return null;
+        }
+        return (
+            <ul>
+                {clickedClass.children.map((child) => (
+                    <li key={child.id}>
+                        <div>{child.name}</div>
+                        <div>{child.description}</div>
+                        {renderChildDescriptions(child)}
+                    </li>
+                ))}
+            </ul>
+        );
+       };
+
+     
+
     //thus far, we have queried for the required class
     if (loading) {
         // Render loading state while data is being fetched
@@ -80,12 +102,19 @@ export default function Map() {
                 </div>
 
 
+                
+    
+
+
                 {popupActive && clickedClass && (
                    <div className="popup">
                      <div className="popup-content">
                      <span className="popup-header">{clickedClass.name}</span>
                      <button className="close" onClick={closePopup}>&times;</button>
-                     <div className="popup-body">{clickedClass.description}</div>
+                     <div className="popup-body">
+                     <div>{clickedClass.description}</div>
+                       {renderChildDescriptions(clickedClass, treeData)}
+                     </div>
                      </div>
                      
                    </div>
@@ -149,7 +178,7 @@ const createNode = async (courseInfo) => {
         return {
             id: courseInfo._id,
             name: courseInfo.Name,
-            description: courseInfo.Description,
+            description: courseInfo.Description, //modified this and added 
             diamond: false,
             children: Prereqs
         };
@@ -165,26 +194,25 @@ const createNode = async (courseInfo) => {
     }
 }
 //console.log("This is treeData " + treeData.length)
-const treeRendering = (treeData, openPopup) => {
-    return (
-        <ul>
-        {
-            treeData.map((item)=>                
-                <button onClick={() => openPopup(item)}  className="popbutton">
-                    
-                 
-                    <div>{item.name}</div>
-                    {
-                        item.children && item.children.length ?
-                        treeRendering(item.children, openPopup)
-                        :''
-                    }
 
-                </button>
-            )                    
-        }
-        </ul>
-    )
-}
+
+
+
+const treeRendering = (treeData, openPopup) => {
+    const renderNode = (node) => (
+        <li key={node.id}>
+            <button onClick={() => openPopup(node)} className="popbutton">
+                <div>{node.name}</div>
+                {node.children && node.children.length ? (
+                    <ul>{node.children.map(renderNode)}</ul>
+                ) : null}
+            </button>
+        </li>
+    );
+
+    return <ul>{treeData.map(renderNode)}</ul>;
+};
+
+
 
 
