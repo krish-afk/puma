@@ -39,14 +39,15 @@
 
 
 .close {
+    position: absolute;
     background-color: white;
     color: #4aa27a;
     text-align: right;
-    top: 10px;
-    left: 100px;
+    top: 20px;
+    right: 50px;
     border: none;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 30px;
     border-radius: 2px;
 
 }
