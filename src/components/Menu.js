@@ -4,9 +4,13 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
+import { grey } from '@mui/material/colors';
+import { Link,useNavigate } from 'react-router-dom';
 
-export default function CustomMenu() {
+export default function CustomMenu(props) {
     const [anchorEl, setAnchorEl] = useState(null);
+    const history=useNavigate()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -14,6 +18,7 @@ export default function CustomMenu() {
 
     const handleClose = () => {
         setAnchorEl(null);
+        history("/")
     };
 
     return (
@@ -24,7 +29,7 @@ export default function CustomMenu() {
                 onClick={handleClick}
                 className="menuButton"
             >
-                <Typography variant="button" style={{ color: 'white', fontSize: '25px'}}>Menu</Typography>
+                <MenuIcon fontSize='large' sx={{ color: grey[50] }}/>
             </Button>
             <Menu
                 id="simple-menu"
