@@ -8,10 +8,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { useState } from 'react';
 
 
 function App() {
-                                             
+  
+  const [username,setQuery]=useState("");
+
   return (
    <div>
     <Router>
@@ -19,7 +22,7 @@ function App() {
         <Route 
         exact
         path="/"
-        element={<Home/>}
+        element={<Home onQuery={setQuery}/>}
         />
         <Route 
         exact
@@ -29,7 +32,7 @@ function App() {
         <Route
         exact
         path='/map/:query'
-        element={<Map/>}
+        element={<Map user={username}/>}
         /> 
       </Routes>
     </Router>
