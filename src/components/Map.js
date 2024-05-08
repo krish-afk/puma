@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 
 var treeData = []
 
-export default function Map() {
+export default function Map(props) {
+    const username= props.user //stores the current user's username (use this to get classes user has taken from the backend)
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     const [treeReady, setTreeReady] = useState(false); 
