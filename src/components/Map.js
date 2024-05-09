@@ -104,7 +104,7 @@ export default function Map() {
                     <CustomMenu />
                     <Link to={`/search/`}>
                         <button type="submit" className="search-button-map" onClick="window.location.reload();">
-                            <SearchIcon className="search-icon" style={{ fontSize: 40 }} />
+                            <SearchIcon className="search-icon" style={{ fontSize: 40, color: 'white' }} />
                         </button>
                     </Link>
                 </div>

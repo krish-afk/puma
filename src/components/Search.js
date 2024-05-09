@@ -63,6 +63,7 @@ export default function Search() {
               <TextField
                 {...params}
                 type="text"
+                id="searchBar"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Lookup a class..."

@@ -43,7 +43,7 @@ export default function SignUp(props){
                     const formData = new FormData();
                     formData.append('username', username);
                     formData.append('file', file);
-                    await axios.post('https://puma-backend-1.onrender.com/transcripts/uploadTranscript', formData);
+                    await axios.post('https://puma-backend-1.onrender.com/transcripts/upload', formData);
                 }
     
                 setError(false);
