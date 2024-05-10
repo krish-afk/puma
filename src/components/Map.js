@@ -14,13 +14,12 @@ import { Link } from 'react-router-dom';
 var treeData = [];
 
 export default function Map(props) {
-    const username= props.user //stores the current user's username (use this to get classes user has taken from the backend)
+    const user = props.user //stores the current user (use this to get classes user has taken from the backend)
     const [result, setResults] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
     const [treeReady, setTreeReady] = useState(false); 
     const [popupActive, setPopupActive] = useState(false); // for popup
     const [clickedClass, setClickedClass] = useState(null); // for popup
-    console.log(username)
     const { query } = useParams();
     const searchResult = query.toUpperCase();
     useEffect(() => {
