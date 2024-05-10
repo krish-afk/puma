@@ -20,7 +20,7 @@ export default function Map(props) {
     const [treeReady, setTreeReady] = useState(false); 
     const [popupActive, setPopupActive] = useState(false); // for popup
     const [clickedClass, setClickedClass] = useState(null); // for popup
-
+    console.log(username)
     const { query } = useParams();
     const searchResult = query.toUpperCase();
     useEffect(() => {
