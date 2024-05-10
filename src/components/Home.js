@@ -14,12 +14,17 @@ import {
 } from "react-router-dom";
 
 
-function Home() {
+function Home({onQuery}) {
   const [registered, setRegistered]= useState(true)
 
   const handleRegisterChange =(e)=>{
     e.preventDefault()
     setRegistered(!registered)
+  }
+
+  const handleInput=(username)=>{
+    // e.preventDefault()
+    onQuery(username)
   }
                                                  
   return (
@@ -32,7 +37,7 @@ function Home() {
       </Grid>
       <Grid xs={6}>
         <div className='div-right'>
-          {registered? <Login onRegisterChange={handleRegisterChange} />: <SignUp onRegisterChange={handleRegisterChange} registerVal={registered} />}
+          {registered? <Login onRegisterChange={handleRegisterChange} getUsername={handleInput} />: <SignUp onRegisterChange={handleRegisterChange} registerVal={registered} />}
         </div>
       </Grid>
     </Grid>
