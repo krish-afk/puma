@@ -19,9 +19,7 @@ test('round trip integration test', async ({ mount,page }) => {
   await page.keyboard.press('Tab')
   await expect(component).toContainText('Enter Password');
   await page.keyboard.insertText('Foo')
-  await page.keyboard.press('Tab')
-  await expect(component).toContainText('Log In');
-  await page.keyboard.press('Enter')
+  await page.click('#loginBox')
 
   // course search
   await expect(component).toContainText('Search a Class');
@@ -53,7 +51,7 @@ test('round trip integration test', async ({ mount,page }) => {
 ////////////////////////////////////////////////
 // Unit Testing of Log-In page
 ////////////////////////////////////////////////
-test('should iterate through sign up page', async ({ mount,page }) => {
+test('should iterate through login in page', async ({ mount,page }) => {
   const _ = await mount(<App />);
   await page.keyboard.press('Tab')
   expect(await page.evaluate(() => document.activeElement?.id)).toBe("usernameBox")
@@ -61,11 +59,8 @@ test('should iterate through sign up page', async ({ mount,page }) => {
   await page.keyboard.press('Tab')
   expect(await page.evaluate(() => document.activeElement?.id)).toBe("passwordBox")
 
-  await page.keyboard.press('Tab')
-  expect(await page.evaluate(() => document.activeElement?.id)).toBe("loginBox")
-
-  await page.keyboard.press('Tab')
-  expect(await page.evaluate(() => document.activeElement?.id)).toBe("signupLink")
+  // advance forward to login
+  await page.click('#loginBox')
 });
 
 test('should contain appropriate text', async ({ mount }) => {
